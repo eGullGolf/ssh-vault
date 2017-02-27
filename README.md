@@ -39,6 +39,10 @@ Encrypt a document from the clipboard (using `pbpaste`):
 pbpaste | ./encrypt.sh 'my.document'
 ```
 
+The document is encrypted to 'safe/my.document.encrypted'.
+If you make your own copy of this repository, the encrypted document
+can even be added and committed to your git repository.
+
 Decrypt the same document to the clipboard (using 'pbcopy'):
 
 ```
