@@ -51,6 +51,10 @@ or
 ./decrypt.sh safe/my.document.encrypted | pbcopy
 ```
 
+In order to decrypt the file, a private SSH key matching one of the
+public SSH keys used for encryption must be found in the SSH agent.
+Use `ssh-add` (or `ssh-add -K`) to add keys to the SSH agent.
+
 ## License
 
 Copyright 2017 eGull SAS
