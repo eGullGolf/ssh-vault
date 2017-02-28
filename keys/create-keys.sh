@@ -4,8 +4,9 @@
 # SSH Public Keys can only encrypt short files: an SSH Public Key of 4096 bits
 # can only encrypt safely up to 446 bytes of data. This is the reason why we
 # create a random symmetrical key for encryption with a length of less than
-# 446 bytes, for example 128 bytes, which is used like some kind of binary
-# password to encrypt and decrypt files in a symmetrical fashion.
+# 446 bytes, for example 128 bytes, then converted to hex (to avoid line breaks
+# in the key: openssl only reads up to the end of the first line), which is
+# used as a password to encrypt and decrypt files in a symmetrical fashion.
 #
 # The secret to protect is now this symmetrical encryption key, which shall be
 # encrypted separately with each of the SSH authorized keys, to make the
@@ -44,7 +45,7 @@ echo 'Load configuration'
 . ./config.sh
 
 echo "Generate random Symmetrical Key of $symKeyLength bits"
-symKey="$(openssl rand "$symKeyLength")"
+symKey="$(openssl rand -hex "$symKeyLength")"
 
 echo "Create empty file for Encrypted Symmetrical Keys: $encryptedSymKeys"
 > "$encryptedSymKeys"
@@ -75,19 +76,3 @@ do
     rm "$opensslPublicKey"
   fi
 done
-
-# ============================================================================
-#   Copyright 2017 eGull SAS
-#
-#   Licensed under the Apache License, Version 2.0 (the "License");
-#   you may not use this file except in compliance with the License.
-#   You may obtain a copy of the License at
-#
-#       http://www.apache.org/licenses/LICENSE-2.0
-#
-#   Unless required by applicable law or agreed to in writing, software
-#   distributed under the License is distributed on an "AS IS" BASIS,
-#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-#   See the License for the specific language governing permissions and
-#   limitations under the License.
-# ============================================================================
