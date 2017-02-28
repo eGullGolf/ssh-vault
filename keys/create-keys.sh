@@ -4,9 +4,10 @@
 # SSH Public Keys can only encrypt short files: an SSH Public Key of 4096 bits
 # can only encrypt safely up to 446 bytes of data. This is the reason why we
 # create a random symmetrical key for encryption with a length of less than
-# 446 bytes, for example 128 bytes, then converted to hex (to avoid line breaks
-# in the key: openssl only reads up to the end of the first line), which is
-# used as a password to encrypt and decrypt files in a symmetrical fashion.
+# 446 bytes, for example 128 bytes, then converted to hex (256 bytes < 446) to
+# avoid line breaks in the key: openssl only reads up to the end of the first
+# line, which is used as a password to encrypt and decrypt files in a
+# symmetrical fashion.
 #
 # The secret to protect is now this symmetrical encryption key, which shall be
 # encrypted separately with each of the SSH authorized keys, to make the

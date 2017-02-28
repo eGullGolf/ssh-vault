@@ -1,7 +1,9 @@
 # Configuration of parameters for Encryption and Decryption
 
 # Length of the Symmetrical Key in bits
-# (see reference below for maximum size according to size of SSH Public Keys)
+# (see reference below for maximum size according to size of SSH Public Keys,
+# and note that the random key is encoded in hex which doubles the number of
+# bytes before the encryption)
 # Reference:
 # What RSA max block size to encode?
 # http://stackoverflow.com/q/11822607
