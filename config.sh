@@ -20,6 +20,12 @@ sshPublicKeys='keys/vault.public.ssh.keys'
 # (one encrypted key per line, in the same order as authorized_keys)
 encryptedSymKeys='keys/vault.sym.keypass.encrypted'
 
+# Absolute path to the SSH private key used for decryption on this machine
+sshPrivateKeyUsedToDecrypt="$HOME/.ssh/id_rsa"
+
+# Absolute path to the SSH public key used for encryption on this machine
+sshPublicKeyUsedToEncrypt="$sshPrivateKeyUsedToDecrypt.pub"
+
 # ============================================================================
 #   Copyright 2017-2018 eGull SAS
 #

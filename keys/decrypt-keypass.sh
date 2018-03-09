@@ -11,30 +11,34 @@ cd ..
 # load config
 . ./config.sh
 
-# Look for one of the SSH Public Keys used for encryption in SSH Agent
-ssh-add -L |
-while read -r agentProtocol agentPublicKey agentPrivateKey
-do
+{
+  # Read the SSH public key used to encrypt on this machine
+  cat "$sshPublicKeyUsedToEncrypt"
+  # make sure that the file ends with a newline
+  echo
+} |
+if read -r thisProtocol thisPublicKey thisComment
+then
   # Look whether this SSH Public Key matches any of the keys used to encrypt
   lineNumber=0
-  while read -r protocol publicKey comment
+  while read -r thatProtocol thatPublicKey thatComment
   do
     lineNumber=$(($lineNumber + 1))
-    if test "$agentProtocol $agentPublicKey" = "$protocol $publicKey"
+    if test "$thisProtocol $thisPublicKey" = "$thatProtocol $thatPublicKey"
     then
       # Encryption key found on line $lineNumber
       # Read the encrypted Symmetrical Key on the same line
       # Decode it from Base64
-      # Decrypt it using SSH Private Key matching the SSH Public Key
+      # Decrypt it using the SSH Private Key matching the SSH Public Key
       tail -n "+$lineNumber" "$encryptedSymKeys" |
       head -n 1 |
       base64 --decode |
       openssl rsautl -decrypt \
-        -inkey "$agentPrivateKey"
+        -inkey "$sshPrivateKeyUsedToDecrypt"
       break 2
     fi
   done < "$sshPublicKeys"
-done
+fi
 
 # ============================================================================
 #   Copyright 2017-2018 eGull SAS

@@ -57,8 +57,16 @@ or
 ```
 
 In order to decrypt the file, a private SSH key matching one of the
-public SSH keys used for encryption must be found in the SSH agent.
-Use `ssh-add` (or `ssh-add -K`) to add keys to the SSH agent.
+public SSH keys used for encryption must be found on the local machine.
+The location of the local SSH keys can be changed in the file config.sh:
+
+```
+# Absolute path to the SSH private key used for decryption on this machine
+sshPrivateKeyUsedToDecrypt="$HOME/.ssh/id_rsa"
+
+# Absolute path to the SSH public key used for encryption on this machine
+sshPublicKeyUsedToEncrypt="$sshPrivateKeyUsedToDecrypt.pub"
+```
 
 ## License
 
