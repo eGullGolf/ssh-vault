@@ -7,7 +7,8 @@ Shell
 
 ## Platform
 
-Tested on macOS Sierra, running openssl 0.9.8.
+Tested on macOS High Sierra,  
+running `openssl version`: `LibreSSL 2.2.7`
 
 ## Configuration
 
