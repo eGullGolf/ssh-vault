@@ -34,7 +34,7 @@ esac
 openssl enc -d "-$symCypher" \
   -base64 \
   -in "$encryptedFilePath" \
-  -pass stdin \
+  -pass stdin
 
 # ============================================================================
 #   Copyright 2017-2018 eGull SAS
