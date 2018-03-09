@@ -61,7 +61,7 @@ Use `ssh-add` (or `ssh-add -K`) to add keys to the SSH agent.
 
 ## License
 
-Copyright 2017 eGull SAS  
+Copyright 2017-2018 eGull SAS  
 Licensed under the [Apache License, Version 2.0][APACHE2]
 
 [APACHE2]: http://www.apache.org/licenses/LICENSE-2.0
